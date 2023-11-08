@@ -1,9 +1,18 @@
 // controllers/kelasController.js
 import { Kelas, Murid } from '../models/index.js';
 
-export const getAllKelas = async (req, res) => {
+ const getAllKelas = async (req, res) => {
     try {
-      const kelas = await Kelas.findAll();
+      const kelas = await Kelas.findAll(
+        {
+          include: [{
+            model: Murid,
+            as: 'murid'
+          }]
+        }
+
+        
+      );
       res.json(kelas);
     } catch (error) {
       res.status(500).send(error.message);
@@ -30,4 +39,4 @@ const createKelas = async (req, res) => {
 
 
 
-export { createKelas };
+export { createKelas,getAllKelas };

@@ -45,7 +45,7 @@ Murid.init({
 // Mendefinisikan hubungan
 Kelas.hasMany(Murid, {
   foreignKey: 'kelasId',
-  as: 'murids'
+  as: 'murid'
 });
 Murid.belongsTo(Kelas, {
   foreignKey: 'kelasId',
@@ -54,7 +54,7 @@ Murid.belongsTo(Kelas, {
 
 export default { Kelas, Murid, sequelize };
 (async () => {
-  await sequelize.sync({force:true});
+  await sequelize.sync();
 
   })();
 
