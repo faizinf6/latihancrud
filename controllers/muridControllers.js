@@ -1,8 +1,5 @@
 import { Kelas, Murid } from '../models/index.js';
-import sequelize from '../config/Database.js'; // path ke konfigurasi database Sequelize Anda
-(async () => {
-    await sequelize.sync({force:true});
-  })();
+
 
 export const getAllMurids = async (req, res) => {
   try {
@@ -22,23 +19,23 @@ export const getAllMurids = async (req, res) => {
 // Create new Murid
 export const createMurid = async (req, res) => {
     try {
-      const { nama, gender, isBoyong, KelasId } = req.body;
-      console.log(KelasId)
+      const { nama, gender, isBoyong, kelasId } = req.body;
+      console.log(kelasId)
   
       // Validasi KelasId sebelum melanjutkan
-      if (KelasId && !(await Kelas.findByPk(KelasId))) {
+      if (kelasId && !(await Kelas.findByPk(kelasId))) {
         return res.status(404).send('Kelas tidak ditemukan.');
       }
   
-      const newMurid = await Murid.create({ nama, gender, isBoyong, KelasId });
+      const newMurid = await Murid.create({ nama, gender, isBoyong, kelasId });
       res.status(201).json(newMurid);
     } catch (error) {
-      const { nama, gender, isBoyong, KelasId } = req.body;
+      const { nama, gender, isBoyong, kelasId } = req.body;
 
-      console.log(KelasId)
-      res.status(500).json(req.body);
+      console.log("babiii")
+      // res.status(500).json(req.body);
 
-    //   res.status(500).send(error.message);
+      res.status(500).send(error.message);
 
     }
   };
